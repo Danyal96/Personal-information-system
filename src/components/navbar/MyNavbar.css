@@ -1,0 +1,6 @@
+.active{
+    border-bottom: 2px solid gray;
+}
+.nav-link:hover{
+   scale: 1.05;
+}
