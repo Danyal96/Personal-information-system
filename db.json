@@ -4,70 +4,70 @@
             "id" : 1,
             "name" : "علیرضا",
             "family" : "بیرانوند",
-            "national-Code" : 12323454,
+            "national_code" : 12323454,
             "favorite" : "فوتبال"
         },
         {
             "id" : 2,
             "name" : "حسن",
             "family" : "یزدانی",
-            "national-Code" : 87459809,
+            "national_code" : 87459809,
             "favorite" : "کشتی"
         },
         {
             "id" : 3,
             "name" : "هادی",
             "family" : "ساعی",
-            "national-Code" : 56451390,
+            "national_code" : 56451390,
             "favorite" : "تکواندو"
         },
         {
             "id" : 4,
             "name" : "مهدی",
             "family" : "ترابی",
-            "national-Code" : 12096754,
+            "national_code" : 12096754,
             "favorite" : "فوتبال"
         },
         {
             "id" : 5,
             "name" : "محمدرضا",
             "family" : "گرایی",
-            "national-Code" : 53859111,
+            "national_code" : 53859111,
             "favorite" : "کشتی"
         },
         {
             "id" : 6,
             "name" : "کیمیا",
             "family" : "علیزاده",
-            "national-Code" : 10928374,
+            "national_code" : 10928374,
             "favorite" : "تکواندو"
         },
         {
             "id" : 7,
             "name" : "حامد",
             "family" : "حدادی",
-            "national-Code" : 14057389,
+            "national_code" : 14057389,
             "favorite" : "بسکتبال"
         },
         {
             "id" : 8,
             "name" : "رومینا",
             "family" : "سالک",
-            "national-Code" : 45648923,
+            "national_code" : 45648923,
             "favorite" : "اسکیت"
         },
         {
             "id" : 9,
             "name" : "آتوسا",
             "family" : "گلشادنژاد",
-            "national-Code" : 23972209,
+            "national_code" : 23972209,
             "favorite" : "کاراته"
         },
         {
             "id" : 10,
             "name" : "وحید",
             "family" : "امیری",
-            "national-Code" : 23786511,
+            "national_code" : 23786511,
             "favorite" : "فوتبال"
         }
     ]

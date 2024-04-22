@@ -8,7 +8,7 @@ import './MyNavbar.css'
 function MyNavbar() {
   const expand = "md";
   return (
-    <Navbar key={expand} style={{backgroundColor : '#a9c2c4' }} expand={expand}>
+    <Navbar key={expand} style={{backgroundColor : '#60b6f7' }} expand={expand}>
       <Container>
         <Navbar.Brand className="lalezar fs-4" href="#">اطلاعات کاربران</Navbar.Brand>
         <Navbar.Toggle aria-controls={`offcanvasNavbar-expand-${expand}`} />
