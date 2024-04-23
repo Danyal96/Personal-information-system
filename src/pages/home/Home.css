@@ -7,8 +7,7 @@
     transition: all 0.5s;
 }
 .do-td span:hover{
-    cursor: pointer;
-    scale: 1.3;
+    scale: 1.1;
 }
 .searchInput , .searchButton{
     all: unset;
@@ -38,4 +37,7 @@
 .accordion-body{
     display: flex;
     justify-content: space-around;
+}
+.chart{
+    width: 100%;
 }
