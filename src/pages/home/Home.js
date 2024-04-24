@@ -13,23 +13,36 @@ import { FaEdit } from "react-icons/fa";
 import { FaLocationDot } from "react-icons/fa6";
 import { MdDelete } from "react-icons/md";
 import { FaChartColumn } from "react-icons/fa6";
+import { CartesianGrid, Line, LineChart, XAxis, YAxis } from "recharts";
 
+import ReactMapGL, { Marker, Popup } from "react-map-gl";
+
+import * as React from "react";
+import Map from "react-map-gl/maplibre";
 
 function Home() {
   const [dataUsers, setDataUsers] = useState([]);
-  const [show, setShow] = useState(false);
   const [formData, setFormData] = useState({});
   const [searchKeyName, setSearchKeyName] = useState("");
   const [searchKeyFamily, setSearchKeyFamily] = useState("");
   const [searchKeyFavorite, setSearchKeyFavorite] = useState("");
 
+  const [latitude, setLatitude] = useState(35.6892);
+  const [longitude, setLongitude] = useState(51.389);
+  const [zoom, setZoom] = useState(2);
+
+  const [show, setShow] = useState(false);
   const [show2, setShow2] = useState(false);
+  const [show3, setShow3] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
 
   const handleClose2 = () => setShow2(false);
   const handleShow2 = () => setShow2(true);
 
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+  const handleClose3 = () => setShow3(false);
+  const handleShow3 = () => setShow3(true);
 
   useEffect(() => {
     axios
@@ -86,6 +99,16 @@ function Home() {
       .get(`http://localhost:8000/users?favorite=${searchKeyFavorite}`)
       .then((response) => setDataUsers(response.data));
   };
+
+  const data = [
+    { name: "شنبه", uv: 4, pv: 2400, amt: 2400 },
+    { name: "یکشنبه", uv: 5, pv: 2400, amt: 2400 },
+    { name: "دوشنبه", uv: 4, pv: 2400, amt: 2400 },
+    { name: "سه شنبه", uv: 3, pv: 2400, amt: 2400 },
+    { name: "چهار شنبه", uv: 5, pv: 2400, amt: 2400 },
+    { name: "پنجشنبه ", uv: 5, pv: 2400, amt: 2400 },
+    { name: " جمعه", uv: 6, pv: 2400, amt: 2400 },
+  ];
 
   return (
     <>
@@ -234,18 +257,44 @@ function Home() {
                   <td>{datauser.national_code}</td>
                   <td>{datauser.favorite}</td>
                   <td className="do-td">
+                    
                     <span>
-                      <IoEyeSharp size={"25px"} color={"#42c2f5"} />
+                      <Button
+                        variant="primary"
+                        onClick={handleShow3}
+                        className="chartbtn"
+                      >
+                        <FaLocationDot size={"25px"} color={""} />
+                      </Button>
+
+                      <Modal show={show3} onHide={handleClose3}>
+                        <Modal.Header closeButton>
+                          <Modal.Title> موقعیت مکانی</Modal.Title>
+                        </Modal.Header>
+                        <Modal.Body>
+                          <ReactMapGL
+                            width={600}
+                            height={600}
+                            latitude={latitude}
+                            longitude={longitude}
+                            zoom={zoom}
+                            mapStyle="https://s3.amazonaws.com/cdn.brianbancroft.io/assets/osmstyle.json"
+                            onViewportChange={(viewState) => {
+                              setLatitude(viewState.latitude);
+                              setLongitude(viewState.longitude);
+                              setZoom(viewState.zoom);
+                            }}
+                          >
+                          </ReactMapGL>
+                        </Modal.Body>
+                        <Modal.Footer>
+                          <Button variant="secondary" onClick={handleClose3}>
+                            بستن
+                          </Button>
+                        </Modal.Footer>
+                      </Modal>
                     </span>
-                    <span>
-                      <FaEdit size={"25px"} />
-                    </span>
-                    <span>
-                      <FaLocationDot size={"25px"} color={"#f5428a"} />
-                    </span>
-                    <span>
-                      <MdDelete size={"25px"} color={"#f52a48"} />
-                    </span>
+                    
                     <span>
                       <Button
                         variant="primary"
@@ -260,14 +309,28 @@ function Home() {
                           <Modal.Title>نمودار میزان مطالعه</Modal.Title>
                         </Modal.Header>
                         <Modal.Body>
-                          
+                          <LineChart
+                            width={500}
+                            height={300}
+                            data={data}
+                            margin={{ top: 5, right: 20, bottom: 5, left: 0 }}
+                          >
+                            <Line
+                              type={"monotone"}
+                              dataKey="uv"
+                              stroke="#8884d8"
+                            />
+                            <CartesianGrid
+                              stroke="#ccc"
+                              strokeDasharray="5 5"
+                            />
+                            <XAxis dataKey="name" />
+                            <YAxis />
+                          </LineChart>
                         </Modal.Body>
                         <Modal.Footer>
                           <Button variant="secondary" onClick={handleClose2}>
-                            Close
-                          </Button>
-                          <Button variant="primary" onClick={handleClose2}>
-                            Save Changes
+                            بستن
                           </Button>
                         </Modal.Footer>
                       </Modal>
