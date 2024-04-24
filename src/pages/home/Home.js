@@ -8,17 +8,12 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import Accordion from "react-bootstrap/Accordion";
 import Modal from "react-bootstrap/Modal";
-import { IoEyeSharp } from "react-icons/io5";
-import { FaEdit } from "react-icons/fa";
 import { FaLocationDot } from "react-icons/fa6";
-import { MdDelete } from "react-icons/md";
 import { FaChartColumn } from "react-icons/fa6";
 import { CartesianGrid, Line, LineChart, XAxis, YAxis } from "recharts";
 
-import ReactMapGL, { Marker, Popup } from "react-map-gl";
-
+import Map from "react-map-gl";
 import * as React from "react";
-import Map from "react-map-gl/maplibre";
 
 function Home() {
   const [dataUsers, setDataUsers] = useState([]);
@@ -27,9 +22,7 @@ function Home() {
   const [searchKeyFamily, setSearchKeyFamily] = useState("");
   const [searchKeyFavorite, setSearchKeyFavorite] = useState("");
 
-  const [latitude, setLatitude] = useState(35.6892);
-  const [longitude, setLongitude] = useState(51.389);
-  const [zoom, setZoom] = useState(2);
+ 
 
   const [show, setShow] = useState(false);
   const [show2, setShow2] = useState(false);
@@ -109,6 +102,8 @@ function Home() {
     { name: "پنجشنبه ", uv: 5, pv: 2400, amt: 2400 },
     { name: " جمعه", uv: 6, pv: 2400, amt: 2400 },
   ];
+
+  let number = 0;
 
   return (
     <>
@@ -240,7 +235,7 @@ function Home() {
           <Table striped bordered hover>
             <thead>
               <tr>
-                <th>#</th>
+                <th>ردیف</th>
                 <th>نام</th>
                 <th>نام خوانوادگی</th>
                 <th>کد ملی</th>
@@ -251,13 +246,12 @@ function Home() {
             <tbody>
               {dataUsers.map((datauser) => (
                 <tr>
-                  <td>{datauser.id}</td>
+                  <td>{(number += 1)}</td>
                   <td>{datauser.name}</td>
                   <td>{datauser.family}</td>
                   <td>{datauser.national_code}</td>
                   <td>{datauser.favorite}</td>
                   <td className="do-td">
-                    
                     <span>
                       <Button
                         variant="primary"
@@ -272,20 +266,16 @@ function Home() {
                           <Modal.Title> موقعیت مکانی</Modal.Title>
                         </Modal.Header>
                         <Modal.Body>
-                          <ReactMapGL
-                            width={600}
-                            height={600}
-                            latitude={latitude}
-                            longitude={longitude}
-                            zoom={zoom}
-                            mapStyle="https://s3.amazonaws.com/cdn.brianbancroft.io/assets/osmstyle.json"
-                            onViewportChange={(viewState) => {
-                              setLatitude(viewState.latitude);
-                              setLongitude(viewState.longitude);
-                              setZoom(viewState.zoom);
+                          <Map
+                            mapboxAccessToken="pk.eyJ1IjoiZGFueWFsOTYiLCJhIjoiY2x2ZHU4cnYzMDJyNTJqcGJmdGpxbjZycyJ9.ifZ3cJG18pqXacKcTQP-GQ"
+                            initialViewState={{
+                              longitude: 51.389,
+                              latitude: 35.6892,
+                              zoom: 7,
                             }}
-                          >
-                          </ReactMapGL>
+                            style={{ width: 465, height: 400 }}
+                            mapStyle="mapbox://styles/mapbox/streets-v9"
+                          />
                         </Modal.Body>
                         <Modal.Footer>
                           <Button variant="secondary" onClick={handleClose3}>
@@ -294,7 +284,7 @@ function Home() {
                         </Modal.Footer>
                       </Modal>
                     </span>
-                    
+
                     <span>
                       <Button
                         variant="primary"
