@@ -11,9 +11,13 @@ import Modal from "react-bootstrap/Modal";
 import { FaLocationDot } from "react-icons/fa6";
 import { FaChartColumn } from "react-icons/fa6";
 import { CartesianGrid, Line, LineChart, XAxis, YAxis } from "recharts";
+import { IoEyeSharp } from "react-icons/io5";
+
+
 
 import Map from "react-map-gl";
 import * as React from "react";
+import { useNavigate } from "react-router-dom";
 
 function Home() {
   const [dataUsers, setDataUsers] = useState([]);
@@ -93,6 +97,10 @@ function Home() {
       .then((response) => setDataUsers(response.data));
   };
 
+  const navg= ()=>{
+    navigate("/users")
+  }
+
   const data = [
     { name: "شنبه", uv: 4, pv: 2400, amt: 2400 },
     { name: "یکشنبه", uv: 5, pv: 2400, amt: 2400 },
@@ -102,6 +110,8 @@ function Home() {
     { name: "پنجشنبه ", uv: 5, pv: 2400, amt: 2400 },
     { name: " جمعه", uv: 6, pv: 2400, amt: 2400 },
   ];
+
+  const navigate = useNavigate();
 
   let number = 0;
 
@@ -252,6 +262,15 @@ function Home() {
                   <td>{datauser.national_code}</td>
                   <td>{datauser.favorite}</td>
                   <td className="do-td">
+                    <span>
+                       <Button
+                        variant="primary"
+                        className="chartbtn"
+                        onClick={navg}
+                      >
+                        <IoEyeSharp  size={"25px"}/>
+                      </Button> 
+                    </span>
                     <span>
                       <Button
                         variant="primary"
